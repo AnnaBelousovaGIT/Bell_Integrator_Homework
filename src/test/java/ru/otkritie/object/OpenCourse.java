@@ -8,20 +8,8 @@ import org.openqa.selenium.WebElement;
 
 public class OpenCourse {
     protected WebDriver driver;
-    protected WebElement inputField;
 
-    public OpenCourse(WebDriver driver) {
-        this.driver = driver;
-        this.inputField = driver.findElement(By.xpath("//input[@title=\"Поиск\"]"));
-
-    }
-
-    public void findOpen(String key) {
-        inputField.click();
-        inputField.sendKeys(key);
-        inputField.submit();
-
-    }
+    public OpenCourse(WebDriver driver) { this.driver = driver; }
 
     public void openLink(WebDriver driver) {
         driver.findElement(By.xpath("//*[@href=\"https://www.open.ru/\"]")).click();

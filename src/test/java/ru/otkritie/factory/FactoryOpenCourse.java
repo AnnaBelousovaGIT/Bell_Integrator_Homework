@@ -11,28 +11,21 @@ import java.util.List;
 public class FactoryOpenCourse {
     private WebDriver driver;
 
-    @FindBy(how = How.XPATH, using = "//input[@title=\"Поиск\"]")
-    WebElement inputField;
 
     @FindBy(how = How.XPATH, using = "//*[@href=\"https://www.open.ru/\"]")
     WebElement open;
 
     @FindBy(how = How.XPATH, using ="//tbody/tr[2]/td[2]/div/span")
-    WebElement dollarSale;
+    WebElement Sale;
 
     @FindBy(how = How.XPATH, using ="//tbody/tr[2]/td[4]/div/span")
-    WebElement dollarBuy;
+    WebElement Buy;
 
 
     public FactoryOpenCourse(WebDriver driver){
         this.driver=driver;
     }
 
-    public void findOpen(String key) {
-        inputField.click();
-        inputField.sendKeys(key);
-        inputField.submit();
-    }
     public void openLink(WebDriver driver) {
         open.click();
         //переход на новую вкладку
@@ -41,8 +34,8 @@ public class FactoryOpenCourse {
         }
     }
     public boolean compareDollarCourse() {
-        double dollarSale = Double.parseDouble(driver.findElement(By.xpath("//tbody/tr[2]/td[2]/div/span")).getText().replace(",", "."));
-        double dollarBuy = Double.parseDouble(driver.findElement(By.xpath("//tbody/tr[2]/td[4]/div/span")).getText().replace(",", "."));
+        double dollarSale = Double.parseDouble(Sale.getText().replace(",", "."));
+        double dollarBuy = Double.parseDouble(Buy.getText().replace(",", "."));
 
         if (dollarSale < dollarBuy){return true;}  else {return false;}
     }

@@ -38,8 +38,9 @@ class Tests extends BasePage {
     @Test
     public void openCoursePO() {
         driver.get(link);
+        BeforeSearch beforeSearch = new BeforeSearch(driver);
+        beforeSearch.findElem("Открытие");
         OpenCourse openBeforeSearch = new OpenCourse(driver);
-        openBeforeSearch.findOpen("Открытие");
         openBeforeSearch.openLink(driver);
         boolean course = openBeforeSearch.compareDollarCourse();
         Assertions.assertTrue(course);
@@ -49,8 +50,9 @@ class Tests extends BasePage {
     @Test
     public void openCoursePF() {
         driver.get(link);
+        FactorySearch factorySearch = PageFactory.initElements(driver, FactorySearch.class);
+        factorySearch.findElem("Открытие");
         FactoryOpenCourse factoryOpenCourse = PageFactory.initElements(driver, FactoryOpenCourse.class);
-        factoryOpenCourse.findOpen("Открытие");
         factoryOpenCourse.openLink(driver);
         boolean course = factoryOpenCourse.compareDollarCourse();
         Assertions.assertTrue(course);
