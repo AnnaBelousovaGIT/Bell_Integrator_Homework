@@ -32,18 +32,11 @@ public class OpenCourse {
     }
 
     public boolean compareDollarCourse() {
-        WebElement dollarSale = driver.findElement(By.xpath("//tbody/tr[2]/td[2]/div/span"));
-        WebElement dollarBuy = driver.findElement(By.xpath("//tbody/tr[2]/td[4]/div/span"));
 
-        String sale = dollarSale.getText();
-        String buy = dollarBuy.getText();
+        double dollarSale = Double.parseDouble(driver.findElement(By.xpath("//tbody/tr[2]/td[2]/div/span")).getText().replace(",", "."));
+        double dollarBuy = Double.parseDouble(driver.findElement(By.xpath("//tbody/tr[2]/td[4]/div/span")).getText().replace(",", "."));
 
-        sale = sale.replace(",", ".");
-        buy = buy.replace(",", ".");
-
-        double s = Double.parseDouble(sale);
-        double b = Double.parseDouble(buy);
-        if (s < b){return true;}  else {return false;}
+        if (dollarSale < dollarBuy){return true;}  else {return false;}
 
     }
 

@@ -1,8 +1,8 @@
 package ru.otkritie.factory;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -24,7 +24,7 @@ public class FactoryOpenCourse {
     WebElement dollarBuy;
 
 
-    public FactoryOpenCourse(WebDriver driver, Class<FactoryOpenCourse> factoryOpenCourseClass){
+    public FactoryOpenCourse(WebDriver driver){
         this.driver=driver;
     }
 
@@ -41,15 +41,10 @@ public class FactoryOpenCourse {
         }
     }
     public boolean compareDollarCourse() {
-        String sale = dollarSale.getText();
-        String buy = dollarBuy.getText();
+        double dollarSale = Double.parseDouble(driver.findElement(By.xpath("//tbody/tr[2]/td[2]/div/span")).getText().replace(",", "."));
+        double dollarBuy = Double.parseDouble(driver.findElement(By.xpath("//tbody/tr[2]/td[4]/div/span")).getText().replace(",", "."));
 
-        sale = sale.replace(",", ".");
-        buy = buy.replace(",", ".");
-
-        double s = Double.parseDouble(sale);
-        double b = Double.parseDouble(buy);
-        if (s < b){return true;}  else {return false;}
+        if (dollarSale < dollarBuy){return true;}  else {return false;}
     }
 
 }
