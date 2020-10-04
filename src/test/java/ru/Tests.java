@@ -1,17 +1,22 @@
 package ru;
 
-import ru.google.factory.FactorySearch;
-import ru.google.object.AfterSearch;
-import ru.google.object.BeforeSearch;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.PageFactory;
+import ru.google.factory.FactorySearch;
+import ru.google.object.AfterSearch;
+import ru.google.object.BeforeSearch;
 import ru.otkritie.factory.FactoryOpenCourse;
 import ru.otkritie.object.OpenCourse;
+import ru.sber.object.Sber;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 class Tests extends BasePage {
 
     static String link = "https://www.google.ru/";
+    static String sberLink = "https://www.sberbank-ast.ru/";
 
     @Test
     public void findGladiolusPO() {
@@ -56,6 +61,19 @@ class Tests extends BasePage {
         factoryOpenCourse.openLink(driver);
         boolean course = factoryOpenCourse.compareDollarCourse();
         Assertions.assertTrue(course);
+    }
 
+
+    @Test
+    public void sberTest() {
+        driver.get(sberLink);
+        Sber sberPageObj = new Sber(driver);
+        String href = sberPageObj.getHrefSubMenu("Главная", "Международная торговая площадка");
+        assertNotNull(href);
+        assertFalse(href.isEmpty());
+        driver.get(href);
     }
 }
+
+
+
